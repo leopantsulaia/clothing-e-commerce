@@ -1,6 +1,8 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+
 import { getAnalytics } from "firebase/analytics";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -8,7 +10,9 @@ import { getAnalytics } from "firebase/analytics";
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
 //myCode bellow
-import { getAuth, signInWithPopup, signInWithRedirect, GoogleAuthProvider } from "firebase/auth";
+
+import { getAuth, signInWithRedirect, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword } from "firebase/auth";
+
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 //myCode Up
 const firebaseConfig = {
@@ -27,18 +31,21 @@ const firebaseApp = initializeApp(firebaseConfig);
 const analytics = getAnalytics(firebaseApp);
 
 //myCode Bellow
-const provider = new GoogleAuthProvider();
+const googleProvider = new GoogleAuthProvider();
 
-provider.setCustomParameters({
+googleProvider.setCustomParameters({
 	prompt: "select_account",
 });
 
 export const auth = getAuth();
-export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
+export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider);
+export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googleProvider);
 
 export const db = getFirestore();
 
-export const createUserDocumentFromAuth = async (userAuth) => {
+export const createUserDocumentFromAuth = async (userAuth, additionalInformation ={}) => {
+	if (!userAuth) return;
+
 	const userDocRef = doc(db, "users", userAuth.uid);
 
 	// console.log(userDocRef);
@@ -48,7 +55,7 @@ export const createUserDocumentFromAuth = async (userAuth) => {
 	// console.log(userSnapshot.exists());
 
 	if (!userSnapshot.exists()) {
-		// this says that the if user data does not exist its true 
+		// this says that the if user data does not exist its true
 		const { displayName, email } = userAuth;
 		const createdAt = new Date();
 
@@ -57,15 +64,24 @@ export const createUserDocumentFromAuth = async (userAuth) => {
 				displayName,
 				email,
 				createdAt,
+				...additionalInformation,
 			});
 		} catch (error) {
 			console.log("error creating the user", error.message);
 		}
 	}
+
 	return userDocRef;
 
 	// if user data exist
 	// create / set the document with the data from userAuth in my collection
 };
+
+export const createAuthUserWithEmailAndPassword = async (email, password) => {
+	if (!email || !password) return;
+	return await createUserWithEmailAndPassword(auth, email, password);
+};
+
+
 
 //myCode Up
