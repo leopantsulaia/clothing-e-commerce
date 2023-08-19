@@ -9,10 +9,7 @@ import "./cart-icon.styles.scss";
 const CartIcon = () => {
 	const { isCartOpen, setIsCartOpen } = useContext(CartContext);
 
-	const toggleIsCartOpen = () => {
-		setIsCartOpen(!isCartOpen);
-	};
-
+	const toggleIsCartOpen = () => setIsCartOpen(!isCartOpen);
 	return (
 		<div
 			className="cart-icon-container"

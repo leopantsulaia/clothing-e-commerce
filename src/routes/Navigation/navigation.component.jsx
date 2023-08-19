@@ -9,6 +9,7 @@ import { CartContext } from "../../contexts/cart.context";
 
 import { ReactComponent as HomeLogo } from "../../assets/Logo.svg";
 
+import { signOutUser } from "../../utils/firebase/firebase.utils";
 import "./navigation.styles.scss";
 
 const Navigation = () => {
@@ -31,7 +32,11 @@ const Navigation = () => {
 					</Link>
 
 					{currentUser ? (
-						<span className="nav-link">SIGN OUT</span>
+						<span
+							className="nav-link"
+							onClick={signOutUser}>
+							SIGN OUT
+						</span>
 					) : (
 						<Link
 							className="nav-link"
