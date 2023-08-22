@@ -1,15 +1,15 @@
 import { Fragment, useContext } from "react";
 import { Outlet, Link } from "react-router-dom";
 
-import CartIcon from "../../../components/cart-icon/cart-icon.component";
-import CartDropdown from "../../../components/cart-dropdown/cart-dropdown.component";
+import CartIcon from "../../components/cart-icon/cart-icon.component";
+import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
 
-import { UserContext } from "../../../contexts/user.context";
-import { CartContext } from "../../../contexts/cart.context";
+import { UserContext } from "../../contexts/user.context";
+import { CartContext } from "../../contexts/cart.context";
 
 import { ReactComponent as HomeLogo } from "../../assets/Logo.svg";
 
-import { signOutUser } from "../firebase.utils";
+import { signOutUser } from "../../utils/firebase/firebase.utils";
 
 import "./navigation.styles.scss";
 
