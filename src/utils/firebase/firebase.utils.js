@@ -27,8 +27,9 @@ const firebaseConfig = {
 // Initialize Firebase
 //firebaseApp is my name, app was default
 const firebaseApp = initializeApp(firebaseConfig);
-console.log(firebaseApp);
+
 //myCode Bellow
+firebaseApp()
 const googleProvider = new GoogleAuthProvider();
 
 googleProvider.setCustomParameters({
