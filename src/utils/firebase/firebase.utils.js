@@ -27,6 +27,9 @@ const firebaseConfig = {
 // Initialize Firebase
 //firebaseApp is my name, app was default
 const firebaseApp = initializeApp(firebaseConfig);
+//trash code cause of warning bellow
+console.log(`firebase successfully works by ${firebaseApp.name} !!! `);
+//trash code cause of warning above
 //myCode Bellow
 const googleProvider = new GoogleAuthProvider();
 
