@@ -11,7 +11,7 @@ const categories = [
   {
     id: 2,
     title: "jackets",
-    imageUrl: "https://i.ibb.co/Xzcw6Ws9/black-shearling.png",
+    imageUrl: "https://i.ibb.co/mJS6vz0/blue-jean-jacket.png",
     route: "shop/jackets",
   },
   {
